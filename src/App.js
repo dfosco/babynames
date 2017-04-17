@@ -7,13 +7,37 @@ import Shortlist from './components/Shortlist'
 
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      filterText: ''
+    }
+  }
+
+  filterUpdate(value) {
+    this.setState({
+      filterText: value
+    })
+  }
+
   render() {
+    console.log('filterText state from parent component: ', this.state.filterText)
     return(
       <div>
-        <Search />
-        <Shortlist />
+        <Search
+          filterText={this.state.filterText}
+          filterUpdate={this.filterUpdate.bind(this)}
+        />
+                       {/* Breaking it down: */}
+                       {/* this. -- gets the context */}
+                       {/* filterUpdate. -- passes down the filterUpdate function */}
+                       {/* bind(this) -- feeds the result back to the context...? */}
         <main>
-          <NamesList data={this.props.data} />
+          <Shortlist />
+          <NamesList
+            data={this.props.data}
+            filterText={this.state.filterText}
+          />
           <Credit />
         </main>
       </div>
