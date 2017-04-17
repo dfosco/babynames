@@ -1,9 +1,8 @@
 # ReactJS Beginner Series
 
-### Ways to create react components
+- You can't use refs in stateless components -- you have to use classes
 
-
-#### Stateless Components
+#### ways to declare stateless components
 
 ```javascript
 import React from 'react'
