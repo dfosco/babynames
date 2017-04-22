@@ -1,25 +1,31 @@
 import React, { Component } from 'react'
 
-class NamesList extends Component {
-  render() {
-    const { data } = this.props
+export default ({data, filterText, addFavourite}) => {
+  // Always manipulate data outside of the return method
 
-    // Always manipulate data outside of the return method
-    const namesList = data.map(name => {
+  // Filter goes through every item in the array and filters according to parameters
+  const namesList = data
+    .filter(name => {
+      // Remove names that do no match current filter text (-1 is not )
+      return name.name.toLowerCase().indexOf(filterText.toLowerCase()) >= 0
+    })
+    .map(name => {
       return(
-        <li key={name.id} className={name.sex}>{name.name}</li>
+        <li
+          key={name.id}
+          className={`${name.sex} unselectable`}
+          onClick={() => addFavourite(name.id)}
+        >
+          {name.name}
+        </li>
       )
     })
 
-    return (
-      <div>
-        <p>filterText value is: {this.props.filterText}</p>
-        <ul>
-          {namesList}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ul>
+        {namesList}
+      </ul>
+    </div>
+  );
 }
-
-export default NamesList

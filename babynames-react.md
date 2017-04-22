@@ -12,7 +12,7 @@
 ```javascript
 // constructor adds props to component (class) when instantiated
 constructor(props) {
-  // super adds objects to the current props
+  // super adds or overrides objects in the current props
   super(props)
   this.state = {
     filterText: ''
